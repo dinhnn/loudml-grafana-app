@@ -308,6 +308,9 @@ export function extract_model_tags(target: any) {
 }
 
 export function extract_model_tags_map(target: any) {
+  if (target.query){
+    return target.query.split(' ').map(item=>item.split(":")).map((pair)=>({tag:pair[0],value:pair[1]}));
+  }
   if (target.tags && target.tags.map) {
     // InfluxDB or so
     return target.tags.map(
